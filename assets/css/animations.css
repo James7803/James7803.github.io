@@ -1,0 +1,9 @@
+#content.fade-exit {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+#content.fade-enter {
+  opacity: 1;
+  transform: translateY(0);
+}

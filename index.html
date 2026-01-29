@@ -1,269 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Your Name — Portfolio</title>
-  <meta name="description" content="Personal portfolio of Your Name: projects, resume, and contact." />
-  <style>
-    :root {
-      --bg: #0b0f14;
-      --card: #121822;
-      --muted: #8892a6;
-      --fg: #e6edf3;
-      --accent: #60a5fa;
-      --ring: rgba(96,165,250,.35);
-    }
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f8fafc;
-        --card: #ffffff;
-        --muted: #475569;
-        --fg: #0f172a;
-        --accent: #2563eb;
-        --ring: rgba(37,99,235,.2);
-      }
-    }
-
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
-      color: var(--fg);
-      background: radial-gradient(1200px 800px at 20% -10%, rgba(96,165,250,.10), transparent 60%),
-                  radial-gradient(1000px 700px at 120% 10%, rgba(94,234,212,.08), transparent 55%),
-                  var(--bg);
-    }
-
-    .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px 56px; }
-
-    /* NAV */
-    .nav {
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: saturate(140%) blur(10px);
-      background: color-mix(in srgb, var(--bg) 70%, transparent);
-      border-bottom: 1px solid color-mix(in srgb, var(--muted) 18%, transparent);
-    }
-    .nav-inner { display: flex; align-items: center; gap: 16px; max-width: 1100px; margin: 0 auto; padding: 10px 20px; }
-    .brand { font-weight: 700; letter-spacing: .2px; }
-    .spacer { flex: 1; }
-    .tabs { display: flex; gap: 6px; }
-    .tab {
-      appearance: none; border: none; background: transparent; color: var(--muted);
-      padding: 8px 12px; border-radius: 10px; font-weight: 600; cursor: pointer; position: relative;
-      transition: color .2s ease, background .2s ease, transform .04s ease;
-    }
-    .tab[aria-selected="true"] { color: var(--fg); background: color-mix(in srgb, var(--accent) 18%, transparent); }
-    .tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    .tab:active { transform: translateY(1px); }
-
-    /* LAYOUT */
-    .grid { display: grid; grid-template-columns: 1.1fr 2fr; gap: 26px; margin-top: 26px; }
-    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
-
-    .card { background: var(--card); border: 1px solid color-mix(in srgb, var(--muted) 18%, transparent);
-            border-radius: 16px; padding: 20px; box-shadow: 0 10px 24px -16px rgba(0,0,0,.35); }
-
-    .hero { display: flex; align-items: center; gap: 18px; }
-    .avatar { width: 72px; height: 72px; border-radius: 14px; background: linear-gradient(145deg, #93c5fd, #6ee7b7); box-shadow: 0 10px 24px -12px var(--ring); }
-    .title { font-size: clamp(26px, 2.6vw, 34px); margin: 0; }
-    .subtitle { color: var(--muted); margin: 2px 0 0; }
-
-    .pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px;
-            border: 1px dashed color-mix(in srgb, var(--muted) 30%, transparent); color: var(--muted); font-size: 13px; }
-
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; border: 1px solid transparent;
-           background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 22%, transparent), color-mix(in srgb, var(--accent) 10%, transparent));
-           color: var(--fg); font-weight: 700; text-decoration: none; box-shadow: 0 10px 24px -12px var(--ring);
-           transition: transform .12s ease, box-shadow .2s ease; }
-    .btn:hover { transform: translateY(-1px); box-shadow: 0 14px 32px -12px var(--ring); }
-
-    /* SECTIONS (views) */
-    .views { position: relative; min-height: 420px; }
-    .section {
-      position: absolute; inset: 0; opacity: 0; transform: translateY(6px) scale(.995);
-      pointer-events: none; filter: saturate(90%);
-      transition: opacity .32s ease, transform .32s ease, filter .32s ease;
-    }
-    .section[aria-hidden="false"]{
-      opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; filter: saturate(100%);
-    }
-
-    /* Respect reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      .section { transition: none; transform: none; }
-      .btn { transition: none; }
-      .tab { transition: none; }
-    }
-
-    /* Content styling */
-    h2 { margin: 0 0 10px; font-size: 22px; }
-    p { margin: 8px 0 14px; color: var(--muted); }
-    ul { padding-left: 18px; margin: 8px 0 14px; }
-    li { margin: 6px 0; }
-    .rows { display: grid; gap: 14px; }
-
-    .proj-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
-    @media (max-width: 700px) { .proj-grid { grid-template-columns: 1fr; } }
-    .proj { padding: 16px; border-radius: 14px; background: linear-gradient(180deg, color-mix(in srgb, var(--card) 85%, transparent), color-mix(in srgb, var(--card) 100%, transparent));
-            border: 1px solid color-mix(in srgb, var(--muted) 18%, transparent); }
-    .proj h3 { margin: 0 0 8px; font-size: 18px; }
-
-    footer { margin-top: 30px; color: var(--muted); font-size: 14px; text-align: center; }
-  </style>
+  <meta charset="UTF-8" />
+  <title>James Ren | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
 </head>
 <body>
-  <nav class="nav" aria-label="Primary">
-    <div class="nav-inner">
-      <div class="brand">Your Name</div>
-      <div class="spacer"></div>
-      <div class="tabs" role="tablist" aria-label="Sections">
-        <button class="tab" role="tab" aria-selected="true" data-target="home" id="tab-home">Home</button>
-        <button class="tab" role="tab" aria-selected="false" data-target="about" id="tab-about">About</button>
-        <button class="tab" role="tab" aria-selected="false" data-target="projects" id="tab-projects">Projects</button>
-        <button class="tab" role="tab" aria-selected="false" data-target="resume" id="tab-resume">Resume</button>
-        <button class="tab" role="tab" aria-selected="false" data-target="contact" id="tab-contact">Contact</button>
-      </div>
-    </div>
-  </nav>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="#intro" data-section="intro">Intro</a>
+      <a href="#resume" data-section="resume">Resume</a>
+      <a href="#contact" data-section="contact">Contact</a>
+    </nav>
+  </header>
 
-  <div class="container">
-    <div class="grid">
-      <section class="card">
-        <div class="hero" aria-live="polite">
-          <div class="avatar" aria-hidden="true"></div>
-          <div>
-            <h1 class="title">Hi, I’m <span style="color: var(--accent);">Your Name</span>.</h1>
-            <p class="subtitle">I build reliable software, study CS/ML, and write about systems & data.</p>
-            <div class="rows">
-              <div class="pill">Currently: seeking Summer 2026 SWE internship</div>
-              <div>
-                <a class="btn" href="#" download id="downloadResume">Download Résumé</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+  <main id="content" class="fade-enter">
+    
+  </main>
 
-      <section class="card views" aria-label="Content views">
-        <!-- HOME -->
-        <div class="section" id="view-home" role="tabpanel" aria-labelledby="tab-home" aria-hidden="false">
-          <h2>Welcome</h2>
-          <p>Click the tabs above to switch sections without changing the URL. Content fades smoothly in/out.</p>
-          <p>Use this space for a short mission statement or a featured project.</p>
-        </div>
+  <footer class="site-footer">
+    <span id="year"></span> James Ren
+  </footer>
 
-        <!-- ABOUT -->
-        <div class="section" id="view-about" role="tabpanel" aria-labelledby="tab-about" aria-hidden="true">
-          <h2>About</h2>
-          <p>I’m a student/developer who enjoys systems, backend, and ML. I like building well-tested, clean code and learning by shipping.</p>
-          <ul>
-            <li>Strong in Python, C/C++, JavaScript/TypeScript</li>
-            <li>Frameworks: Django, React, PyTorch</li>
-            <li>Interests: OS/Memory, ML systems, performance</li>
-          </ul>
-        </div>
-
-        <!-- PROJECTS -->
-        <div class="section" id="view-projects" role="tabpanel" aria-labelledby="tab-projects" aria-hidden="true">
-          <h2>Projects</h2>
-          <div class="proj-grid">
-            <article class="proj">
-              <h3>PokéTrade</h3>
-              <p>A Django-based marketplace for trading Pokémon with collections, carts, and admin tools. Built with Agile practices.</p>
-              <a class="btn" href="#" target="_blank" rel="noopener">View Repo</a>
-            </article>
-            <article class="proj">
-              <h3>Current Crisis (VIP)</h3>
-              <p>Unity strategy game; implemented solar generator adjacency discounts and hover price updates; optimized C# components.</p>
-              <a class="btn" href="#" target="_blank" rel="noopener">View Repo</a>
-            </article>
-            <article class="proj">
-              <h3>Brain Tumor Classifier</h3>
-              <p>Built CNN with transfer learning; preprocessing pipeline, evaluation, and ablations on MRI dataset.</p>
-              <a class="btn" href="#" target="_blank" rel="noopener">View Repo</a>
-            </article>
-            <article class="proj">
-              <h3>AI Design Patterns Tutor</h3>
-              <p>Dialogflow CX agent that teaches Strategy, Composite, and Observer patterns—language-agnostic and conceptual.</p>
-              <a class="btn" href="#" target="_blank" rel="noopener">View Repo</a>
-            </article>
-          </div>
-        </div>
-
-        <!-- RESUME -->
-        <div class="section" id="view-resume" role="tabpanel" aria-labelledby="tab-resume" aria-hidden="true">
-          <h2>Résumé</h2>
-          <p>Link your PDF résumé below. You can also embed a quick summary.</p>
-          <ul>
-            <li><a href="#" id="resumeLink" target="_blank" rel="noopener">Open PDF résumé</a></li>
-            <li>Highlights: SWE intern-ready; systems & ML coursework; team projects; leadership.</li>
-          </ul>
-        </div>
-
-        <!-- CONTACT -->
-        <div class="section" id="view-contact" role="tabpanel" aria-labelledby="tab-contact" aria-hidden="true">
-          <h2>Contact</h2>
-          <p>Let’s connect.</p>
-          <ul>
-            <li>Email: <a href="mailto:you@example.com">you@example.com</a></li>
-            <li>GitHub: <a href="https://github.com/your-username" target="_blank" rel="noopener">github.com/your-username</a></li>
-            <li>LinkedIn: <a href="#" target="_blank" rel="noopener">linkedin.com/in/your-handle</a></li>
-          </ul>
-        </div>
-      </section>
-    </div>
-
-    <footer>© <span id="year"></span> Your Name — Built with GitHub Pages</footer>
-  </div>
-
-  <script>
-    // ——— Tab/Section switching with fade ———
-    const tabs = Array.from(document.querySelectorAll('.tab'));
-    const sections = {
-      home: document.getElementById('view-home'),
-      about: document.getElementById('view-about'),
-      projects: document.getElementById('view-projects'),
-      resume: document.getElementById('view-resume'),
-      contact: document.getElementById('view-contact')
-    };
-
-    function showView(name) {
-      for (const t of tabs) t.setAttribute('aria-selected', String(t.dataset.target === name));
-      for (const [n, el] of Object.entries(sections)) {
-        el.setAttribute('aria-hidden', String(n !== name));
-      }
-      // Move focus to the first heading of the active panel for accessibility
-      const active = sections[name];
-      const h2 = active.querySelector('h2');
-      if (h2) setTimeout(() => h2.focus && h2.focus(), 10);
-    }
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => showView(tab.dataset.target));
-      tab.addEventListener('keydown', (e) => {
-        // optional keyboard nav with arrow keys
-        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-          const i = tabs.indexOf(tab);
-          const dir = e.key === 'ArrowRight' ? 1 : -1;
-          const next = tabs[(i + dir + tabs.length) % tabs.length];
-          next.focus();
-        }
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          tab.click();
-        }
-      });
-    });
-
-    // Defaults
-    showView('home');
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // ——— Replace links with your assets ———
-    document.getElementById('downloadResume').href = 'assets/Resume.pdf';
-    document.getElementById('resumeLink').href = 'assets/Resume.pdf';
-  </script>
+  <script src="assets/js/sections.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
