@@ -36,3 +36,144 @@
   font-size: 0.85rem;
   color: #9ca3af;
 }
+
+.intro-layout{
+  display:grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.5rem;
+  align-items:start;
+}
+
+
+
+.profile-photo{
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+.profile-photo img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+}
+
+.profile-name{
+  margin: 0.25rem 0 0.25rem;
+  font-size: 1.4rem;
+  text-align:center;
+}
+
+.profile-tagline{
+  margin: 0 0 1rem;
+  text-align:center;
+  color:#cbd5e1;
+  line-height:1.5;
+  font-size:0.95rem;
+}
+
+.profile-meta{
+  margin: 1rem 0;
+  color:#cbd5e1;
+  font-size:0.95rem;
+}
+
+.meta-row{
+  display:flex;
+  gap:0.5rem;
+  align-items:center;
+}
+
+.meta-icon{ opacity:0.9; }
+
+
+.profile-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 0.45rem;
+  vertical-align: middle;
+  fill: currentColor;
+}
+
+.icon-text-x {
+  display: inline-block;
+  width: 16px;              /* match SVG icon size */
+  text-align: center;
+
+  font-size: 16px;
+  line-height: 1;
+  vertical-align: middle;
+  margin-right: 0.45rem;
+  transform: translateY(-1px); /* fine-tune */
+}
+
+.profile-links a {
+  color: #e5e7eb;
+  text-decoration: none;
+}
+
+.profile-links a:hover {
+  text-decoration: underline;
+}
+
+.about-card{
+  padding: 0.5rem 0;
+}
+
+.about-title{
+  font-size: 2.2rem;
+  margin: 0 0 1rem;
+}
+
+.about-bullets{
+  margin: 0 0 1.25rem;
+  padding-left: 1.25rem;
+  color:#e5e7eb;
+  line-height:1.7;
+}
+
+.about-bullets li{
+  margin: 0.5rem 0;
+}
+
+.about-cta{
+  margin: 1.25rem 0 2rem;
+  font-weight: 600;
+  color:#e5e7eb;
+}
+
+.section-title{
+  margin: 2rem 0 0.75rem;
+  font-size: 1.6rem;
+}
+
+.item-list{
+  margin: 0 0 1.5rem;
+  padding-left: 1.25rem;
+  line-height:1.7;
+}
+
+@media (max-width: 860px){
+  .intro-layout{
+    grid-template-columns: 1fr;
+  }
+  .profile-card{
+    position: static;
+  }
+  .profile-photo{
+    width: 130px;
+    height: 130px;
+  }
+}
