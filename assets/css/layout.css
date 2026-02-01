@@ -104,7 +104,6 @@
   height: 16px;
   margin-right: 0.45rem;
   vertical-align: middle;
-  fill: currentColor;
 }
 
 .icon-text-x {
@@ -144,6 +143,15 @@
   line-height:1.7;
 }
 
+.education-item {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.education-text {
+  line-height: 1.5;
+}
+
 .about-bullets li{
   margin: 0.5rem 0;
 }
@@ -176,4 +184,91 @@
     width: 130px;
     height: 130px;
   }
+}
+
+
+
+.exp-item {
+  margin-top: 2rem;
+}
+
+.exp-title {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+.exp-subtitle {
+  margin-top: 6px;
+  font-size: 1rem;
+  color: rgba(226, 232, 240, 0.80);
+}
+
+.exp-date {
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(226, 232, 240, 0.65);
+}
+
+.exp-bullets {
+  margin-top: 1rem;
+  padding-left: 1rem;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(226, 232, 240, 0.70);
+}
+
+.exp-bullets.nested {
+  margin-top: 0.75rem;
+  padding-left: 1.5rem;
+  font-size: 14px;
+  color: rgba(226, 232, 240, 0.60);
+}
+
+.exp-bullets li::marker {
+  color: rgba(148, 163, 184, 0.6);
+}
+
+.normal-link {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.normal-link:hover {
+  text-decoration: underline;
+}
+
+
+.contact-lead {
+  margin-top: 0.75rem;
+  color: rgba(226, 232, 240, 0.75);
+  line-height: 1.7;
+  max-width: 65ch;
+}
+
+.contact-list {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.contact-label {
+  color: rgba(226, 232, 240, 0.55);
+}
+
+.contact-row a {
+  color: #e5e7eb;
+  text-decoration: none;
+}
+
+.contact-row a:hover {
+  text-decoration: underline;
 }
